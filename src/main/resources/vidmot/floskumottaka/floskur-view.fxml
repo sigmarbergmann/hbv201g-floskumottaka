@@ -114,8 +114,10 @@
    <ButtonBar prefHeight="68.0" prefWidth="625.0">
       <buttons>
           <Button fx:id="fxTilbakaButton" mnemonicParsing="false" onAction="#fxTilbakaButtonHandler" text="Til baka" />
-         <Button mnemonicParsing="false" text="Fá greitt" />
-         <Button mnemonicParsing="false" text="Þjónustuver" />
+         <Button fx:id="fxFaGreittButton" mnemonicParsing="false" onAction="#fxFaGreittButtonHandler" text="Fá greitt" />
+          <Button fx:id="fxThjonustuverButton" mnemonicParsing="false"
+                  onAction="#fxThjonustuverHandler"
+                  text="Þjónustuver" />
           <Button fx:id="fxStopButton" mnemonicParsing="false" onAction="#fxStopButtonHandler" text="Hætta" />
       </buttons>
    </ButtonBar>

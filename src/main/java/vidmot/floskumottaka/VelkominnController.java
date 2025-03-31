@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+
 /******************************************************************************
  *  Nafn    : Sigmar Bergmann Sigurvinsson
  *  T-póstur: sbs85@hi.is
@@ -35,4 +36,9 @@ public class VelkominnController {
     public void fxStopButtonHandler(ActionEvent event) {
         ViewSwitcher.switchTo(View.KVEDJA);
     }
+    public void fxThjonustuverHandler(ActionEvent event) {
+        SvarDialogController dialog = new SvarDialogController();
+        dialog.showAndWait();
+    }
+
 }

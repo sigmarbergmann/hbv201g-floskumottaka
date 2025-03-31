@@ -9,6 +9,7 @@ package vidmot.floskumottaka;
  *****************************************************************************/
 public enum View {
     VELKOMINN("/vidmot/floskumottaka/velkominn-view.fxml"),
+    FA_GREITT("fa-greitt-view.fxml"),
     FLOSKUR("/vidmot/floskumottaka/floskur-view.fxml"),
     KVEDJA("/vidmot/floskumottaka/kvedja-view.fxml");
 

@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import vinnsla.floskumottaka.Floskur;
+import vinnsla.floskumottaka.FloskurData;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class FloskurController {
     public Label fxHeildVirdi;     // heildarvirði dósa og flaska sem hefur verið safnað
 
     // vinnsla
-    private final Floskur floskur = new Floskur();  // Model klasi
+    private final Floskur floskur = FloskurData.getFloskur();
 
     /**
      * Handler fyrir að setja inn fjöldi flaska. Ef fjöldi er neikvæður eða ólöglegur birtist rauður rammi
@@ -157,9 +158,13 @@ public class FloskurController {
      * Setur samtals viðmótshlutina
      */
     private void setSamtals() {
-        fxSamtalsFjoldi.setText(floskur.getSamtalsFjoldi() + "");
-        fxSamtalsVirdi.setText(floskur.getSamtalsVirdi() + "");
+        int samtalsFjoldi = floskur.getSamtalsFjoldi();
+        int samtalsVirdi = floskur.getSamtalsVirdi();
+        fxSamtalsFjoldi.setText(samtalsFjoldi + "");
+        fxSamtalsVirdi.setText(samtalsVirdi + "");
+
     }
+
 
     /**
      * Ef fjöldi er neikvæður þá er stíllinn setur RANGT
@@ -189,5 +194,12 @@ public class FloskurController {
      */
     public void fxStopButtonHandler(ActionEvent event) {
         ViewSwitcher.switchTo(View.KVEDJA);
+    }
+    public void fxThjonustuverHandler(ActionEvent event) {
+        SvarDialogController dialog = new SvarDialogController();
+        dialog.showAndWait();
+    }
+    public void fxFaGreittButtonHandler(ActionEvent event) {
+        ViewSwitcher.switchTo(View.FA_GREITT);
     }
 }
