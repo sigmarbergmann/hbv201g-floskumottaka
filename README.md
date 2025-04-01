@@ -5,8 +5,7 @@ Flöskumóttaka er notendaviðmótsforrit sem gefur notanda kost á að skila fl
 Til að keyra forrit:
 
 git clone https://github.com/sigmarbergmann/HBV201G-floskumottaka.git
-
-cd floskumottaka
+cd HBV201G-floskumottaka
 
 mvn clean install
 mvn javafx:run
