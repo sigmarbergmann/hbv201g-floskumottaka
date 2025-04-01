@@ -5,7 +5,7 @@ Flöskumóttaka er notendaviðmótsforrit sem gefur notanda kost á að skila fl
 Til að keyra forrit:
 
 git clone https://github.com/sigmarbergmann/HBV201G-floskumottaka.git
-cd HBV201G-floskumottaka
 
-mvn clean install
-mvn javafx:run
+1. Opnaðu verkefnið í IntelliJ
+2. Hægrismelltu á `pom.xml` og veldu **Add as Maven Project**
+3. Undir `Plugins` → `javafx`, tvísmelltu á `javafx:run`
