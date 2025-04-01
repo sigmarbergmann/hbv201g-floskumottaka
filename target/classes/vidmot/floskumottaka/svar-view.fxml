@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="400.0" stylesheets="@css/floskur.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <VBox spacing="10">
+            <Label fx:id="fxSvarDialogText" prefHeight="17.0" prefWidth="380.0" />
+            <TextField fx:id="fxSvarTextField" prefHeight="37.0" prefWidth="380.0" promptText="Skrifaðu hér..." />
+            <Label fx:id="fxFeedbackLabel" alignment="TOP_LEFT" prefHeight="129.0" prefWidth="377.0" wrapText="true" />
+        </VBox>
+    </content>
+    <buttonTypes>
+        <ButtonType fx:id="fxHaettaVid" buttonData="CANCEL_CLOSE" text="Loka" />
+    </buttonTypes>
+</DialogPane>

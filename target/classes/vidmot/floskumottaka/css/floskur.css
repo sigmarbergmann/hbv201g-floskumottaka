@@ -1,0 +1,51 @@
+.rett-inntak {
+    -fx-border-color: grey;
+}
+.rangt-inntak {
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+}
+
+
+.button-bar {
+    -fx-spacing: 20;
+    -fx-padding: 10px;
+}
+.button {
+    -fx-font-size: 14px;
+    -fx-padding: 8px 10px;
+    -fx-cursor: hand;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-width: 1;
+}
+
+
+.main-container {
+    -fx-padding: 10px;
+}
+
+.left-panel, .right-panel {
+    -fx-spacing: 10px;
+    -fx-padding: 5px;
+}
+
+#fxVelkominnText, #fxKvedjaText {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+
+#fxGreidsluText, #fxSvarDialogText {
+    -fx-font-size: 18px;
+}
+.kvittun-box {
+    -fx-padding: 0 120px 0 120px;
+}
+
+#fxKvittun {
+    -fx-font-family: "Courier New", monospace;
+    -fx-font-size: 14px;
+}
+#fxFeedbackLabel {
+    -fx-font-size: 14px;
+}

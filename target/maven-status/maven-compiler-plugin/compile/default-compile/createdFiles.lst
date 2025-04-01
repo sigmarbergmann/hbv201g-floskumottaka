@@ -1,0 +1,12 @@
+vidmot\floskumottaka\View.class
+vidmot\floskumottaka\FloskurApplication.class
+vidmot\floskumottaka\FaGreittController.class
+vinnsla\floskumottaka\FloskurData.class
+vidmot\floskumottaka\VelkominnController.class
+vinnsla\floskumottaka\Floskur.class
+vidmot\floskumottaka\FloskurController.class
+vidmot\floskumottaka\KvedjaController.class
+module-info.class
+vinnsla\floskumottaka\FeedbackService.class
+vidmot\floskumottaka\SvarDialogController.class
+vidmot\floskumottaka\ViewSwitcher.class
