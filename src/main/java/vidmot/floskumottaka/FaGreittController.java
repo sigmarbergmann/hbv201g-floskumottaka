@@ -1,3 +1,11 @@
+/******************************************************************************
+ *  Nafn    : Sigmar Bergmann Sigurvinsson
+ *  T-póstur: sbs85@hi.is
+ *
+ *  Lýsing  : Controller sem birtir kvittun og sér um greiðsluaðgerðir með
+ *            peningum eða korti. Lokar fyrir frekari greiðslu þegar greitt hefur verið.
+ *****************************************************************************/
+
 package vidmot.floskumottaka;
 
 import javafx.event.ActionEvent;
@@ -10,6 +18,9 @@ import vinnsla.floskumottaka.FloskurData;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Controller fyrir kvittunarskjá. Sér um að birta kvittun og meðhöndla val á greiðslumáta.
+ */
 public class FaGreittController {
 
     @FXML private TextArea fxKvittun;
@@ -19,10 +30,17 @@ public class FaGreittController {
     private final Floskur floskur = FloskurData.getFloskur();
     private boolean erGreitt = false;
 
+    /**
+     * Upphafsstillir viðmótið með skilaboðum til notanda.
+     */
     public void initialize() {
         fxKvittun.setText("Veldu greiðslumáta til að fá kvittun.\n");
     }
 
+    /**
+     * Handler þegar notandi velur að fá greitt með peningum.
+     * Birtir kvittun og lokar fyrir frekari val.
+     */
     @FXML
     protected void onPeningar() {
         if (erGreitt) return;
@@ -32,6 +50,10 @@ public class FaGreittController {
         erGreitt = true;
     }
 
+    /**
+     * Handler þegar notandi velur að fá greitt með korti.
+     * Birtir kvittun og lokar fyrir frekari val.
+     */
     @FXML
     protected void onKort() {
         if (erGreitt) return;
@@ -41,6 +63,12 @@ public class FaGreittController {
         erGreitt = true;
     }
 
+    /**
+     * Býr til kvittun sem inniheldur upplýsingar um fjölda og virði skilaðra eininga,
+     * greiðslumáta og dagsetningu.
+     *
+     * @param leid greiðslumáti sem notandi valdi ("Peningar" eða "Kort")
+     */
     private void birtaKvittun(String leid) {
         String dagsetningOgTimi = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
@@ -77,6 +105,11 @@ public class FaGreittController {
         floskur.greida();
     }
 
+    /**
+     * Skiptir yfir í kveðjuviðmót þegar notandi ýtir á „Hætta“ hnappinn.
+     *
+     * @param event viðburður sem kemur frá hnappi
+     */
     @FXML
     public void fxStopButtonHandler(ActionEvent event) {
         ViewSwitcher.switchTo(View.KVEDJA);

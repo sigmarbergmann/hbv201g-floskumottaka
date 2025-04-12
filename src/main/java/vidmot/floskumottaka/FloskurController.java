@@ -1,11 +1,11 @@
-
 /*****************************************************************************
- *  Nafn    : Ebba Þóra Hvannberg
- *  T-póstur: ebba@hi.is
- *  Lýsing  : Stýriklasi fyrir Flöskur. Notandi getur sett inn fjöldi flaska,
+ *  Nafn    : Sigmar Bergmann Sigurvinsson
+ *  T-póstur: sbs85@hi.is
+ *  Lýsing  : Stýriklasi fyrir Flöskur. Notandi getur sett inn fjölda flaska,
  *  dósa, hreinsað og fengið
  *  greitt fyrir flöskur og dósir
  *****************************************************************************/
+
 package vidmot.floskumottaka;
 
 import javafx.event.ActionEvent;
@@ -19,71 +19,72 @@ import vinnsla.floskumottaka.FloskurData;
 
 import java.util.List;
 
+/**
+ * Stýrir aðgerðum í viðmóti fyrir flöskumóttöku. Heldur utan um
+ * tengingar við gagnaklasa, les inntak frá notanda, reiknar virði og
+ * uppfærir viðmót eftir aðgerðum.
+ */
 public class FloskurController {
+
     // fastar
     private static final String RANGT = "rangt-inntak";
 
     // viðmótshlutir
     @FXML
-    private TextField fxFloskur; // fjöldi flaska
+    private TextField fxFloskur;
     @FXML
-    private TextField fxDosir; // fjöldi dósa
+    private TextField fxDosir;
     @FXML
-    public Label fxISKFloskur;  // virði flaska
+    public Label fxISKFloskur;
     @FXML
-    public Label fxISKDosir;    // virði dósa
+    public Label fxISKDosir;
     @FXML
-    public Label fxSamtalsFjoldi; // samtals fjöldi dósa og flaska
+    public Label fxSamtalsFjoldi;
     @FXML
-    public Label fxSamtalsVirdi;   // sammtals virði dósa og flaska
+    public Label fxSamtalsVirdi;
     @FXML
-    public Label fxHeildFjoldi;    // heildarfjöldi dósa og flaska sem hefur verið safnað
+    public Label fxHeildFjoldi;
     @FXML
-    public Label fxHeildVirdi;     // heildarvirði dósa og flaska sem hefur verið safnað
+    public Label fxHeildVirdi;
 
     // vinnsla
     private final Floskur floskur = FloskurData.getFloskur();
 
     /**
-     * Handler fyrir að setja inn fjöldi flaska. Ef fjöldi er neikvæður eða ólöglegur birtist rauður rammi
+     * Setur inn fjölda flaska og reiknar virði.
      *
-     * @param ignoredEvent ónotað
+     * @param ignoredEvent ónotaður ActionEvent
      */
     @FXML
     protected void onFloskur(ActionEvent ignoredEvent) {
-
         try {
             int fjoldi = Integer.parseInt(fxFloskur.getText());
             if (fjoldi > 0) {
                 floskur.setFjoldiFloskur(fjoldi);
                 fxISKFloskur.setText(floskur.getISKFloskur() + "");
                 setSamtals();
-            }
-            else {
+            } else {
                 neikvaedurFjoldi(fxFloskur);
             }
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             fxFloskur.getStyleClass().add(RANGT);
         }
     }
 
     /**
-     * Handler fyrir að setja inn fjöldi dósa. Ef fjöldi er neikvæður eða ólöglegur birtist rauður rammi
+     * Setur inn fjölda dósa og reiknar virði.
      *
-     * @param actionEvent action atburður
+     * @param actionEvent ónotaður atburður
      */
     @FXML
     protected void onDosir(ActionEvent actionEvent) {
-
         try {
             int fjoldi = Integer.parseInt(fxDosir.getText());
             if (fjoldi > 0) {
                 floskur.setFjoldiDosir(fjoldi);
                 fxISKDosir.setText(floskur.getISKDosir() + "");
                 setSamtals();
-            }
-            else {
+            } else {
                 neikvaedurFjoldi(fxDosir);
             }
         } catch (NumberFormatException e) {
@@ -92,7 +93,7 @@ public class FloskurController {
     }
 
     /**
-     * Handler fyrir að hreinsa tölur úr dósa og flöskusviðum
+     * Hreinsar viðmótið og núverandi færslu.
      *
      * @param actionEvent ónotað
      */
@@ -100,17 +101,16 @@ public class FloskurController {
     protected void onHreinsa(ActionEvent actionEvent) {
         floskur.hreinsa();
         fxDosir.setText(floskur.getFjoldiDosir() + "");
-        eydaRanga(fxDosir.getStyleClass());
         fxFloskur.setText(floskur.getFjoldiFloskur() + "");
-        eydaRanga(fxFloskur.getStyleClass());
         fxISKDosir.setText(floskur.getISKDosir() + "");
         fxISKFloskur.setText(floskur.getISKFloskur() + "");
+        eydaRanga(fxDosir.getStyleClass());
+        eydaRanga(fxFloskur.getStyleClass());
         setSamtals();
     }
 
     /**
-     * Handler fyrir að greiða fyrir flöskur og dósir
-     * bætir við heildarfjölda og heildarvirði
+     * Greiðir fyrir flöskur og dósir og uppfærir heildartölur.
      *
      * @param actionEvent ónotað
      */
@@ -123,82 +123,96 @@ public class FloskurController {
     }
 
     /**
-     * Eyðir stílnum með röngu inntaki og setur stílinn með réttu inntaki
+     * Fjarlægir villustíl þegar notandi skrifar aftur í reit.
      *
-     * @param keyEvent atburðurinn sem berst
+     * @param keyEvent atburður frá lyklaborði
      */
     public void onStafur(KeyEvent keyEvent) {
-        TextField textField = ((TextField) keyEvent.getSource());
+        TextField textField = (TextField) keyEvent.getSource();
         List<String> styleClasses = textField.getStyleClass();
         keyEydaRanga(keyEvent, styleClasses);
     }
 
-// private hjálparaðferðir
+    // hjálparaðferðir
+
     /**
-     * Bregðast við keyEvent og fjarlægja rangt stílinn
+     * Fjarlægir rauðan stíl ef ýtt er á takka sem er ekki ENTER.
      *
-     * @param keyEvent     lyklaatburður
-     * @param styleClasses listi af stílum
+     * @param keyEvent     atburður frá lyklaborði
+     * @param styleClasses stíllisti sem þarf að uppfæra
      */
     private static void keyEydaRanga(KeyEvent keyEvent, List<String> styleClasses) {
-        if (styleClasses == null || styleClasses.isEmpty()) {
-            return;
-        }
-        if (keyEvent.getCode() != KeyCode.ENTER ) {
+        if (styleClasses == null || styleClasses.isEmpty()) return;
+        if (keyEvent.getCode() != KeyCode.ENTER) {
             eydaRanga(styleClasses);
         }
     }
 
+    /**
+     * Fjarlægir rauðan stíl (rangt-inntak) úr styleClass listanum.
+     *
+     * @param styleClasses stíllisti sem á að hreinsa
+     */
     private static void eydaRanga(List<String> styleClasses) {
         styleClasses.remove(RANGT);
     }
 
-
     /**
-     * Setur samtals viðmótshlutina
+     * Uppfærir samtals fjölda og virði í viðmóti.
      */
     private void setSamtals() {
         int samtalsFjoldi = floskur.getSamtalsFjoldi();
         int samtalsVirdi = floskur.getSamtalsVirdi();
         fxSamtalsFjoldi.setText(samtalsFjoldi + "");
         fxSamtalsVirdi.setText(samtalsVirdi + "");
-
     }
 
-
     /**
-     * Ef fjöldi er neikvæður þá er stíllinn setur RANGT
+     * Bætir við villustíl ef inntakið er neikvætt.
      *
-     * @param f textasvið fyrir annað hvort dósir eða flöskur
-     * @return skilar true ef fjöldi er jákvæður annars false
+     * @param f TextField sem á að merkja sem rangt ef fjöldi < 0
      */
     private void neikvaedurFjoldi(TextField f) {
-        List<String> styleClasses = f.getStyleClass();
-        if (Integer.parseInt(f.getText()) < 0) {
-            styleClasses.add(RANGT);
+        int value = Integer.parseInt(f.getText());
+        if (value < 0) {
+            f.getStyleClass().add(RANGT);
         }
     }
+
     /**
-     * Meðhöndlar val á til baka hnappnum og skiptir yfir í aðalskjá.
+     * Skiptir yfir í aðalviðmót þegar ýtt er á „Til baka“ hnappinn.
      *
-     * @param event viðburður þegar ýtt er á til baka hnappinn
+     * @param event viðburður
      */
     @FXML
     public void fxTilbakaButtonHandler(ActionEvent event) {
         ViewSwitcher.switchTo(View.VELKOMINN);
     }
+
     /**
-     * Skiptir yfir í kveðjuviðmót til að hætta í forritinu.
+     * Skiptir yfir í kveðjuviðmót þegar ýtt er á „Hætta“ hnappinn.
      *
-     * @param event viðburður þegar ýtt er á "Hætta" hnappinn
+     * @param event viðburður
      */
     public void fxStopButtonHandler(ActionEvent event) {
         ViewSwitcher.switchTo(View.KVEDJA);
     }
+
+    /**
+     * Opnar þjónustuver dialog sem birtir svör við spurningum notanda.
+     *
+     * @param event viðburður
+     */
     public void fxThjonustuverHandler(ActionEvent event) {
         SvarDialogController dialog = new SvarDialogController();
         dialog.showAndWait();
     }
+
+    /**
+     * Skiptir yfir í kvittunarviðmót þegar ýtt er á „Fá greitt“ hnappinn.
+     *
+     * @param event viðburður
+     */
     public void fxFaGreittButtonHandler(ActionEvent event) {
         ViewSwitcher.switchTo(View.FA_GREITT);
     }

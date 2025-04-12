@@ -1,7 +1,6 @@
-
 /******************************************************************************
- *  Nafn    : Ebba Þóra Hvannberg
- *  T-póstur: ebba@hi.is
+ *  Nafn    : Sigmar Bergmann Sigurvinsson
+ *  T-póstur: sbs85@hi.is
  *  Lýsing  : Application klasi sem les inn notendaviðmótslýsingu úr .fxml og ræsir gluggann
  *
  *
